@@ -1,0 +1,36 @@
+{
+    "manifestVersion": 1,
+    "id": "Versioning-tasks",
+    "publisher": "ygo74",
+    "version": "1.0.5",
+    "name": "Versioning-tasks",
+    "description": "Tasks to calculate next version and to update application versions",
+    "categories": [
+        "Azure Pipelines"
+    ],
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],
+    "icons": {
+        "default": "images/success.png"
+    },
+    "files": [
+        {
+            "path": "CalculateNextVersion/CalculateNextVersionV1"
+        }
+    ],
+    "contributions": [
+        {
+            "id": "ygo74-Versioning-tasks",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "CalculateNextVersion"
+            }
+        }
+    ]
+}
