@@ -29,7 +29,7 @@ stages:
           - task: Npm@1
             inputs:
               command: 'custom'
-              workingDir: '/CalculateNextVersion/CalculateNextVersionV1/tests' # Update to the name of the directory of your task's tests
+              workingDir: 'CalculateNextVersion/CalculateNextVersionV1/tests' # Update to the name of the directory of your task's tests
               customCommand: 'testScript' # See the definition in the explanation section below - it may be called test
           - task: PublishTestResults@2
             inputs:
