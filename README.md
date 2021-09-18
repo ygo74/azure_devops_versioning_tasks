@@ -45,7 +45,7 @@ tsc --init --target es6
 Install test tools
 
 ```powershell
-npm install mocha --save-dev -g
+npm install mocha --save-dev
 npm install sync-request --save-dev
 npm install @types/mocha --save-dev
 ```
