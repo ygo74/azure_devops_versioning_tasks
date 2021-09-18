@@ -45,16 +45,16 @@ stages:
           #     workingDir: 'CalculateNextVersion/CalculateNextVersionV1'
           #     customCommand: install mocha --save-dev
 
-          - task: Bash@3
-            displayName: Run task unit tests
-            inputs:
-              targetType: "inline"
-              workingDirectory: CalculateNextVersion/CalculateNextVersionV1
-              script: |
-                npm run testScript --loglevel verbose
-            env:
-              TASK_TEST_TRACE: 1
-              DEBUG: mocha*
+          # - task: Bash@3
+          #   displayName: Run task unit tests
+          #   inputs:
+          #     targetType: "inline"
+          #     workingDirectory: CalculateNextVersion/CalculateNextVersionV1
+          #     script: |
+          #       npm run testScript --loglevel verbose
+          #   env:
+          #     TASK_TEST_TRACE: 1
+          #     DEBUG: mocha*
 
           # - task: Npm@1
           #   inputs:
@@ -64,10 +64,10 @@ stages:
           #   env:
           #     TASK_TEST_TRACE: 1
 
-          - task: PublishTestResults@2
-            inputs:
-              testResultsFormat: 'JUnit'
-              testResultsFiles: '**/ResultsFile.xml'
+          # - task: PublishTestResults@2
+          #   inputs:
+          #     testResultsFormat: 'JUnit'
+          #     testResultsFiles: '**/ResultsFile.xml'
 
   - stage: Package_extension_and_publish_build_artifacts
     jobs:
