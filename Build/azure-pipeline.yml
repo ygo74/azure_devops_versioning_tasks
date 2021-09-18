@@ -38,12 +38,12 @@ stages:
               script: |
                 tsc
 
-          - task: Npm@1
-            displayName: Install tests environment
-            inputs:
-              command: 'custom'
-              workingDir: 'CalculateNextVersion/CalculateNextVersionV1'
-              customCommand: install mocha --save-dev
+          # - task: Npm@1
+          #   displayName: Install tests environment
+          #   inputs:
+          #     command: 'custom'
+          #     workingDir: 'CalculateNextVersion/CalculateNextVersionV1'
+          #     customCommand: install mocha --save-dev
 
           - task: Bash@3
             displayName: Run task unit tests
