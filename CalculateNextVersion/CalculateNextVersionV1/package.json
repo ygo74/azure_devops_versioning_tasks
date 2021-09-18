@@ -17,6 +17,7 @@
     "@types/node": "^16.9.2",
     "@types/q": "^1.5.5",
     "mocha": "^9.1.1",
+    "mocha-xunit-reporter": "^2.3.0",
     "sync-request": "^6.1.0"
   }
 }

@@ -54,6 +54,7 @@ stages:
                 npm run testScript --loglevel verbose
             env:
               TASK_TEST_TRACE: 1
+              DEBUG: mocha*
 
           # - task: Npm@1
           #   inputs:
