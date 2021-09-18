@@ -11,6 +11,8 @@ https://github.com/microsoft/azure-pipelines-tasks/blob/master/Tasks/ArchiveFile
 https://docs.microsoft.com/en-us/azure/devops/extend/develop/integrate-build-task?view=azure-devops
 
 
+azure-devops-extension-tasks : https://github.com/microsoft/azure-devops-extension-tasks/tree/main/BuildTasks
+
 ## prerequisites
 
  npm i -g tfx-cli
