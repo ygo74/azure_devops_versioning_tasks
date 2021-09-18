@@ -102,6 +102,7 @@ stages:
               extensionId: '$(ExtensionID)'
               extensionName: '$(ExtensionName)'
               extensionVersion: '$(Task.Extension.Version)'
+              patternManifest: 'azure-devops-extension'
               updateTasksVersion: true
               updateTasksVersionType: 'patch'
               extensionVisibility: 'private' # Change to public if you're publishing to the marketplace
