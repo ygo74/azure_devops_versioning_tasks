@@ -106,3 +106,4 @@ dist
 Releases
 ResultsFile.xml
 .taskkey
+*.js
