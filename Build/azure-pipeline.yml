@@ -17,6 +17,7 @@ stages:
               version: "v0.7.x"
 
           - task: Npm@1
+            displayName: Install tasks dependencies
             inputs:
               command: 'install'
               workingDir: 'CalculateNextVersion/CalculateNextVersionV1' # Update to the name of the directory of your task
@@ -36,6 +37,13 @@ stages:
               workingDirectory: CalculateNextVersion/CalculateNextVersionV1/tests
               script: |
                 tsc
+
+          - task: Npm@1
+            displayName: Install tests environment
+            inputs:
+              command: 'custom'
+              workingDir: 'CalculateNextVersion/CalculateNextVersionV1'
+              customCommand: install mocha --save-dev
 
           - task: Npm@1
             inputs:
