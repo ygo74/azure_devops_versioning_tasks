@@ -135,7 +135,7 @@ stages:
               connectTo: 'VsTeam'
               connectedServiceName: 'ygo74_publisher' # Change to whatever you named the service connection
               fileType: 'vsix'
-              vsixFile: '/Publisher.*.vsix'
+              vsixFile: '/$(PublisherID).*.vsix'
               publisherId: '$(PublisherID)'
               extensionId: '$(ExtensionID)'
               extensionName: '$(ExtensionName)'
