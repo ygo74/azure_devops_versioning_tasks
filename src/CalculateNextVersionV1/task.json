@@ -9,17 +9,10 @@
     "author": "YGO",
     "version": {
         "Major": 1,
-        "Minor": 1,
+        "Minor": 2,
         "Patch": 0
     },
-    "groups": [
-        {
-          "name": "advanced",
-          "displayName": "Advanced",
-          "isExpanded": false
-        }
-      ],
-    "instanceNameFormat": "Echo $(samplestring)",
+    "instanceNameFormat": "Echo $(technology)",
     "inputs": [
         {
             "name": "technology",
@@ -41,8 +34,7 @@
             "defaultValue": "false",
             "required": false,
             "groupName": "advanced",
-            "helpMarkDown": "Define a custom url to connect to a custom npm repository",
-            "visibleRule": "technology = npm"
+            "helpMarkDown": "Define a custom url to connect to a custom npm repository"
         }
     ],
     "execution": {
