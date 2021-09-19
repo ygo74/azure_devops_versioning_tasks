@@ -138,6 +138,6 @@ target.test = function() {
     }
 
     var testResultTaskPath = path.join(testResultPath, taskName + '-results.xml');
-    run('mocha ' + pattern1 + ' --reporter xunit --reporter-options output=' + testResultTaskPath, /*inheritStreams:*/true);
+    run('mocha ' + pattern1 + ' --reporter mocha-junit-reporter --reporter-options output=' + testResultTaskPath, /*inheritStreams:*/true);
 }
 

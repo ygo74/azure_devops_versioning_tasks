@@ -35,13 +35,14 @@ stages:
               customCommand: 'run build -- --task $(taskName)'
 
 
-          - task:  Npm@1
-            displayName: Run tests for $(taskName)
-            inputs:
-              command: 'custom'
-              workingDir: '$(Build.SourcesDirectory)'
-              customCommand: 'run test -- --task $(taskName)'
+          # - task:  Npm@1
+          #   displayName: Run tests for $(taskName)
+          #   inputs:
+          #     command: 'custom'
+          #     workingDir: '$(Build.SourcesDirectory)'
+          #     customCommand: 'run test -- --task $(taskName)'
 
+          - script: npm test -- --task $(taskName)
 
           - task: PublishTestResults@2
             inputs:
