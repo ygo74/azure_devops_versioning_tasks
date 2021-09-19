@@ -47,6 +47,8 @@ stages:
           #     customCommand: 'run test -- --task $(taskName)'
 
           - script: npm test -- --task $(taskName)
+            env:
+              DEBUG: mocha*
 
           - task: PublishTestResults@2
             inputs:
