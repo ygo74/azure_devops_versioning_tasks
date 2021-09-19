@@ -13,6 +13,10 @@ stages:
     jobs:
       - job:
         displayName: Build and tests $(taskName)
+        strategy:
+          matrix:
+            CalculateNextVersionV1:
+          maxParallel: 2
         variables:
           taskName: CalculateNextVersionV1
         steps:
