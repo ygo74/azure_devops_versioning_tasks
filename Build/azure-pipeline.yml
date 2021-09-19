@@ -16,6 +16,7 @@ stages:
         strategy:
           matrix:
             CalculateNextVersionV1:
+              taskName: 'CalculateNextVersionV1'
           maxParallel: 2
         variables:
           taskName: CalculateNextVersionV1
