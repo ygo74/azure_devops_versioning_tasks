@@ -29,7 +29,7 @@
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "CalculateNextVersion"
+                "name": "CalculateNextVersionV1"
             }
         }
     ]
