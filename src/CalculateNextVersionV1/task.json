@@ -9,18 +9,40 @@
     "author": "YGO",
     "version": {
         "Major": 1,
-        "Minor": 0,
-        "Patch": 1
+        "Minor": 1,
+        "Patch": 0
     },
+    "groups": [
+        {
+          "name": "advanced",
+          "displayName": "Advanced",
+          "isExpanded": false
+        }
+      ],
     "instanceNameFormat": "Echo $(samplestring)",
     "inputs": [
         {
-            "name": "samplestring",
-            "type": "string",
-            "label": "Sample String",
+            "name": "technology",
+            "type": "pickList",
+            "label": "Technology type to detect next version",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "A sample string"
+            "helpMarkDown": "Choose the technology type to detect next version of your build / component",
+            "options": {
+                "npm": "NodeJs",
+                "maven": "Java",
+                "docker": "Docker"
+            }
+        },
+        {
+            "name": "npmRepositoryUrl",
+            "type": "string",
+            "label": "Customm npm repository url",
+            "defaultValue": "false",
+            "required": false,
+            "groupName": "advanced",
+            "helpMarkDown": "Define a custom url to connect to a custom npm repository",
+            "visibleRule": "technology = npm"
         }
     ],
     "execution": {
