@@ -12,14 +12,13 @@ stages:
     displayName: Build and tests tasks
     jobs:
       - job:
-        displayName: Build and tests $(taskName)
+        displayName: Build and tests
         strategy:
           matrix:
             CalculateNextVersionV1:
               taskName: 'CalculateNextVersionV1'
           maxParallel: 2
-        variables:
-          taskName: CalculateNextVersionV1
+
         steps:
           - task: TfxInstaller@3
             inputs:
@@ -47,14 +46,14 @@ stages:
           #     workingDir: '$(Build.SourcesDirectory)'
           #     customCommand: 'run test -- --task $(taskName)'
 
-          - script: npm test -- --task $(taskName)
-            env:
-              DEBUG: mocha*
+          # - script: npm test -- --task $(taskName)
+          #   env:
+          #     DEBUG: mocha*
 
-          - task: PublishTestResults@2
-            inputs:
-              testResultsFormat: 'JUnit'
-              testResultsFiles: '**/*-results.xml'
+          # - task: PublishTestResults@2
+          #   inputs:
+          #     testResultsFormat: 'JUnit'
+          #     testResultsFiles: '**/*-results.xml'
 
   - stage: Package_extension_and_publish_build_artifacts
     jobs:
