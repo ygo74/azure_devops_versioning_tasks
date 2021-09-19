@@ -4,7 +4,7 @@
   "description": "Tasks to manage build versioning",
   "main": "build/make.js",
   "scripts": {
-    "test": "node ./Build/make.js test",
+    "test":  "node ./Build/make.js test",
     "build": "node ./Build/make.js build",
     "clean": "node ./Build/make.js clean"
   },

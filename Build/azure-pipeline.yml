@@ -9,8 +9,12 @@ variables:
 
 stages:
   - stage: Run_and_publish_unit_tests
+    displayName: Build and tests tasks
     jobs:
       - job:
+        displayName: Build and tests $(taskName)
+        variables:
+          taskName: CalculateNextVersionV1
         steps:
           - task: TfxInstaller@3
             inputs:
@@ -24,19 +28,19 @@ stages:
 
 
           - task: Npm@1
-            displayName: Compile Task CalculateNextVersionV1
+            displayName: Compile Task $(taskName)
             inputs:
               command: 'custom'
               workingDir: '$(Build.SourcesDirectory)'
-              customCommand: 'run build -- --task CalculateNextVersionV1'
+              customCommand: 'run build -- --task $(taskName)'
 
 
-          - task: Bash@3
-            displayName: Run tests for CalculateNextVersionV1
+          - task:  Npm@1
+            displayName: Run tests for $(taskName)
             inputs:
               command: 'custom'
               workingDir: '$(Build.SourcesDirectory)'
-              customCommand: 'run test -- --task CalculateNextVersionV1'
+              customCommand: 'run test -- --task $(taskName)'
 
 
           - task: PublishTestResults@2
