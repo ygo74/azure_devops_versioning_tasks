@@ -33,7 +33,6 @@
             "label": "Customm npm repository url",
             "defaultValue": "false",
             "required": false,
-            "groupName": "advanced",
             "helpMarkDown": "Define a custom url to connect to a custom npm repository"
         }
     ],
