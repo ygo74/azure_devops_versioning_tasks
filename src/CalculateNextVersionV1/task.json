@@ -1,7 +1,7 @@
 {
     "$schema": "https://raw.githubusercontent.com/Microsoft/azure-pipelines-task-lib/master/tasks.schema.json",
     "id": "17a2d72a-518a-42a9-a8a6-04ce17071c50",
-    "name": "CalculateNextVersion",
+    "name": "CalculateNextVersionV1",
     "friendlyName": "Calculate Next Version",
     "description": "Calculate Next Version",
     "helpMarkDown": "",
