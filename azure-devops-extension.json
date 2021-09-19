@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "Versioning-tasks",
     "publisher": "ygo74",
-    "version": "1.0.6",
+    "version": "1.0.9",
     "name": "Versioning-tasks",
     "description": "Tasks to calculate next version and to update application versions",
     "categories": [
@@ -29,7 +29,7 @@
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "CalculateNextVersionV1"
+                "name": "_build/Tasks/CalculateNextVersionV1"
             }
         }
     ]
