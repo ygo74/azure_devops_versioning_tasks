@@ -17,32 +17,57 @@ stages:
               version: "v0.7.x"
 
           - task: Npm@1
-            displayName: Install Build dependencies
+            displayName: Install tasks dependencies
             inputs:
               command: 'install'
-              workingDir: '$(Build.SourcesDirectory)'
-
-
-          - task: Npm@1
-            displayName: Compile Task CalculateNextVersionV1
-            inputs:
-              command: 'custom'
-              workingDir: '$(Build.SourcesDirectory)'
-              customCommand: 'run build -- --task CalculateNextVersionV1'
-
+              workingDir: 'CalculateNextVersion/CalculateNextVersionV1' # Update to the name of the directory of your task
 
           - task: Bash@3
-            displayName: Run tests for CalculateNextVersionV1
+            displayName: Compile Task
             inputs:
-              command: 'custom'
-              workingDir: '$(Build.SourcesDirectory)'
-              customCommand: 'run test -- --task CalculateNextVersionV1'
+              targetType: "inline"
+              workingDirectory: CalculateNextVersion/CalculateNextVersionV1
+              script: |
+                tsc
 
-
-          - task: PublishTestResults@2
+          - task: Bash@3
+            displayName: Compile Task tests
             inputs:
-              testResultsFormat: 'JUnit'
-              testResultsFiles: '**/*-results.xml'
+              targetType: "inline"
+              workingDirectory: CalculateNextVersion/CalculateNextVersionV1/tests
+              script: |
+                tsc
+
+          # - task: Npm@1
+          #   displayName: Install tests environment
+          #   inputs:
+          #     command: 'custom'
+          #     workingDir: 'CalculateNextVersion/CalculateNextVersionV1'
+          #     customCommand: install mocha --save-dev
+
+          # - task: Bash@3
+          #   displayName: Run task unit tests
+          #   inputs:
+          #     targetType: "inline"
+          #     workingDirectory: CalculateNextVersion/CalculateNextVersionV1
+          #     script: |
+          #       npm run testScript --loglevel verbose
+          #   env:
+          #     TASK_TEST_TRACE: 1
+          #     DEBUG: mocha*
+
+          # - task: Npm@1
+          #   inputs:
+          #     command: 'custom'
+          #     workingDir: 'CalculateNextVersion/CalculateNextVersionV1' # Update to the name of the directory of your task's tests
+          #     customCommand: 'run testScript --loglevel verbose'  # See the definition in the explanation section below - it may be called test
+          #   env:
+          #     TASK_TEST_TRACE: 1
+
+          # - task: PublishTestResults@2
+          #   inputs:
+          #     testResultsFormat: 'JUnit'
+          #     testResultsFiles: '**/ResultsFile.xml'
 
   - stage: Package_extension_and_publish_build_artifacts
     jobs:
@@ -51,21 +76,17 @@ stages:
           - task: TfxInstaller@3
             inputs:
               version: "v0.7.x"
-
           - task: Npm@1
-            displayName: Install Build dependencies
             inputs:
               command: 'install'
-              workingDir: '$(Build.SourcesDirectory)'
-
-
-          - task: Npm@1
-            displayName: Compile Task CalculateNextVersionV1
+              workingDir: 'CalculateNextVersion/CalculateNextVersionV1' # Update to the name of the directory of your task
+          - task: Bash@3
+            displayName: Compile Javascript
             inputs:
-              command: 'custom'
-              workingDir: '$(Build.SourcesDirectory)'
-              customCommand: 'run build -- --task CalculateNextVersionV1'
-
+              targetType: "inline"
+              script: |
+                cd CalculateNextVersion/CalculateNextVersionV1 # Update to the name of the directory of your task
+                tsc
           - task: QueryAzureDevOpsExtensionVersion@3
             inputs:
               connectTo: 'VsTeam'
@@ -74,7 +95,6 @@ stages:
               extensionId: '$(ExtensionID)'
               versionAction: 'Patch'
               outputVariable: 'Task.Extension.Version'
-
           - task: PackageAzureDevOpsExtension@3
             inputs:
               rootFolder: '$(System.DefaultWorkingDirectory)'
@@ -87,19 +107,16 @@ stages:
               updateTasksVersionType: 'patch'
               extensionVisibility: 'private' # Change to public if you're publishing to the marketplace
               extensionPricing: 'free'
-
           - task: CopyFiles@2
             displayName: "Copy Files to: $(Build.ArtifactStagingDirectory)"
             inputs:
               Contents: "**/*.vsix"
               TargetFolder: "$(Build.ArtifactStagingDirectory)"
-
           - task: PublishBuildArtifacts@1
             inputs:
               PathtoPublish: '$(Build.ArtifactStagingDirectory)'
               ArtifactName: '$(ArtifactName)'
               publishLocation: 'Container'
-
   - stage: Download_build_artifacts_and_publish_the_extension
     jobs:
       - job:
@@ -107,14 +124,12 @@ stages:
           - task: TfxInstaller@3
             inputs:
               version: "v0.7.x"
-
           - task: DownloadBuildArtifacts@0
             inputs:
               buildType: "current"
               downloadType: "single"
               artifactName: "$(ArtifactName)"
               downloadPath: "$(System.DefaultWorkingDirectory)"
-
           - task: PublishAzureDevOpsExtension@3
             inputs:
               connectTo: 'VsTeam'

@@ -103,7 +103,11 @@ dist
 # TernJS port file
 .tern-port
 
-Releases
+_build
+_releases
+_testResults
+.vscode
 ResultsFile.xml
 .taskkey
-*.js
+src/**/.taskkey
+src/**/*.js

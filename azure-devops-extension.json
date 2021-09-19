@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "Versioning-tasks",
     "publisher": "ygo74",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "name": "Versioning-tasks",
     "description": "Tasks to calculate next version and to update application versions",
     "categories": [
@@ -18,7 +18,7 @@
     },
     "files": [
         {
-            "path": "CalculateNextVersion/CalculateNextVersionV1"
+            "path": "_build/Tasks/CalculateNextVersionV1"
         }
     ],
     "contributions": [

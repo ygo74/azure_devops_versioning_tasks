@@ -1,16 +1,18 @@
 {
-  "name": "CalculateNextVersion",
+  "name": "CalculateNextVersion-tests",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "_suite.js",
   "scripts": {
-    "testScript": "mocha tests/_suite.js --reporter xunit --reporter-option output=ResultsFile.xml"
+    "testScript": "mocha tests/_suite.js --reporter xunit --reporter-option output=ResultsFile.xml",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "azure-pipelines-task-lib": "^3.1.9"
+    "azure-pipelines-task-lib": "^3.1.9",
+    "semver": "^7.3.5"
   },
   "devDependencies": {
     "mocha": "^9.1.1",
