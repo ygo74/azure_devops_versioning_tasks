@@ -5,6 +5,22 @@ import * as ttm from 'azure-pipelines-task-lib/mock-test';
 describe('Sample task tests', function () {
 
     before( function() {
+        process.env['AGENT_VERSION'] = '2.115.0';
+        process.env["AGENT_JOBNAME"] = 'jobName';
+        process.env["AGENT_TEMPDIRECTORY"] = process.cwd();
+
+        process.env["SYSTEM_DEFAULTWORKINGDIRECTORY"] =  process.cwd();
+        process.env["SYSTEM_DEFINITIONID"] = '123';
+        process.env["SYSTEM_COLLECTIONID"] = 'collection1';
+        process.env["SYSTEM_HOSTTYPE"] = 'build';
+        process.env["SYSTEM_SERVERTYPE"] = "hosted";
+        process.env["SYSTEM_TEAMFOUNDATIONCOLLECTIONURI"] = "https://abc.visualstudio.com/";
+        process.env["SYSTEM_TEAMPROJECT"] = 'project1';
+
+        process.env["BUILD_BUILDID"] = '1';
+        process.env["BUILD_BUILDNUMBER"] = '1';
+        process.env["BUILD_DEFINITIONNAME"] = 'test';
+        process.env["BUILD_SOURCEVERSION"] = "123abc"
 
     });
 
@@ -25,7 +41,7 @@ describe('Sample task tests', function () {
         assert.equal(tr.warningIssues.length, 0, "should have no warnings");
         assert.equal(tr.errorIssues.length, 0, "should have no errors");
         console.log(tr.stdout);
-        assert.equal(tr.stdout.indexOf('Hello human') >= 0, true, "should display Hello human");
+        assert.equal(tr.stdout.indexOf('Strategy :') >= 0, true, "should display Strategy");
         done();
 
     });

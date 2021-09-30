@@ -3,13 +3,26 @@ const semver = require('semver');
 
 async function run() {
     try {
-        const inputString: string | undefined = tl.getInput('samplestring', true);
-        if (inputString == 'bad') {
-            tl.setResult(tl.TaskResult.Failed, 'Bad input was given');
-            return;
-        }
-        console.log('Hello', inputString);
 
+        // Read environments variables
+        const sourceBranch: string | undefined = tl.getVariable('Build.SourceBranch');
+        console.log('SourceBranch', sourceBranch);
+
+        // Read Mandatory inputs
+        const strategy: string | undefined = tl.getInput('Strategy', true);
+        const filePath: string | undefined = tl.getInput('FilePath', false);
+        const language: string | undefined = tl.getInput('Language', false);
+        const assemblyAttribute: string | undefined = tl.getInput('AssemblyAttribute', false);
+        const versionVariablePath: string | undefined = tl.getInput('VersionVariablePath', false);
+        const versionScheme: string | undefined = tl.getInput('VersionScheme', true);
+
+        // Display Variables
+        console.log('Strategy : ', strategy);
+        console.log('FilePath : ', filePath);
+        console.log('Language : ', language);
+        console.log('AssemblyAttribute : ', assemblyAttribute);
+        console.log('VersionVariablePath : ', versionVariablePath);
+        console.log('VersionScheme : ', versionScheme);
 
         // Test semver increment
         let version = '1.0.0';

@@ -141,3 +141,32 @@ target.test = function() {
     run('mocha ' + pattern1 + ' --reporter mocha-junit-reporter --reporter-options output=' + testResultTaskPath, /*inheritStreams:*/true);
 }
 
+target.bump = function() {
+
+    // load files
+    var taskName = options.task;
+    var taskPath = path.join(__dirname, "../src/",taskName);
+
+    var taskJsonPath = path.join(taskPath, 'task.json');
+    var taskJson = JSON.parse(fs.readFileSync(taskJsonPath));
+
+    // var taskLocJsonPath = path.join(taskPath, 'task.loc.json');
+    // var taskLocJson = JSON.parse(fs.readFileSync(taskLocJsonPath));
+
+    if (typeof taskJson.version.Patch != 'number') {
+        fail(`Error processing '${taskName}'. version.Patch should be a number.`);
+    }
+
+    taskJson.version.Patch = taskJson.version.Patch + 1;
+    // taskLocJson.version.Patch = taskLocJson.version.Patch + 1;
+
+    fs.writeFileSync(taskJsonPath, JSON.stringify(taskJson, null, 4));
+    // fs.writeFileSync(taskLocJsonPath, JSON.stringify(taskLocJson, null, 2));
+
+    // Check that task.loc and task.loc.json versions match
+//     if ((taskJson.version.Major !== taskLocJson.version.Major) ||
+//         (taskJson.version.Minor !== taskLocJson.version.Minor) ||
+//         (taskJson.version.Patch !== taskLocJson.version.Patch)) {
+//         console.log(`versions dont match for task '${taskName}', task json: ${JSON.stringify(taskJson.version)} task loc json: ${JSON.stringify(taskLocJson.version)}`);
+//     }
+}

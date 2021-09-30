@@ -10,31 +10,83 @@
     "version": {
         "Major": 1,
         "Minor": 3,
-        "Patch": 0
+        "Patch": 1
     },
-    "instanceNameFormat": "Echo $(technology)",
+    "instanceNameFormat": "Calculate Next Version",
     "inputs": [
         {
-            "name": "technology",
+            "name": "Strategy",
             "type": "pickList",
-            "label": "Technology type to detect next version",
+            "label": "Strategy used to retrieve the Version",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "Choose the technology type to detect next version of your build / component",
+            "helpMarkDown": "Define how retrieve the version to calculate the NextVersion",
             "options": {
-                "npm": "NodeJs",
-                "maven": "Java",
-                "docker": "Docker"
+                "file": "File",
+                "user": "User",
+                "tag": "Tag"
             }
         },
         {
-            "name": "npmRepositoryUrl",
+            "name": "FilePath",
             "type": "string",
-            "label": "Customm npm repository url",
-            "defaultValue": "false",
+            "label": "File which contains the version",
+            "defaultValue": "",
             "required": false,
-            "helpMarkDown": "Define a custom url to connect to a custom npm repository"
+            "helpMarkDown": "Define the file which contains the version"
+        },
+        {
+            "name": "Language",
+            "type": "pickList",
+            "label": "File format which contains the version",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Define the file format which contains the version",
+            "options": {
+                "csharp": "CSharp",
+                "vb": "VB",
+                "maven": "Maven",
+                "nodejs": "Nodejs",
+                "yaml": "Yaml",
+                "json": "Json",
+                "xml": "Xml"
+            }
+        },
+        {
+            "name": "AssemblyAttribute",
+            "type": "pickList",
+            "label": "Assembly file's attribute which contains the version",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Define the attribute in an Assembly file which contains the version",
+            "options": {
+                "csharp": "AssemblyInformationalVersion",
+                "vb": "AssemblyVersion",
+                "maven": "AssemblyFileVersion"
+            }
+        },
+        {
+            "name": "VersionVariablePath",
+            "type": "string",
+            "label": "Path to find the version variable",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Define the path to find the version variable in a Yaml, Json or XML file"
+        },
+        {
+            "name": "VersionScheme",
+            "type": "pickList",
+            "label": "Expected next version scheme",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Define the expected next version scheme",
+            "options": {
+                "semver": "SemVer",
+                "calendar": "Calendar"
+            }
         }
+
+
     ],
     "execution": {
         "Node10": {

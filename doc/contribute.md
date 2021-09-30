@@ -44,7 +44,7 @@ remarks :
 => Catch Error : https://stackoverflow.com/questions/68240884/error-object-inside-catch-is-of-type-unkown
 
 ## Build extension
-tfx extension create --manifest-globs .\azure-devops-extension.json --output-path ./Releases --rev-version
+tfx extension create --manifest-globs .\azure-devops-extension.json --output-path ./_releases --rev-version
 
 ## Debug
 

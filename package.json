@@ -6,7 +6,9 @@
   "scripts": {
     "test": "node ./Build/make.js test",
     "build": "node ./Build/make.js build",
-    "clean": "node ./Build/make.js clean"
+    "clean": "node ./Build/make.js clean",
+    "bump": "node ./Build/make.js bump",
+    "buildAndTest": "node ./Build/make.js build test"
   },
   "repository": {
     "type": "git",
