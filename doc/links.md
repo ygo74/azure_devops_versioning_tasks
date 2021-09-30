@@ -1,5 +1,7 @@
 # Sources
 
+Task json schema : https://github.com/microsoft/azure-pipelines-task-lib/blob/master/tasks.schema.json
+
 https://docs.microsoft.com/en-us/azure/devops/extend/develop/add-build-task?view=azure-devops
 
 

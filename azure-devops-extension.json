@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "versioning-tasks",
     "publisher": "ygo74",
-    "version": "1.0.13",
+    "version": "1.0.22",
     "name": "Versioning Management Extension Tasks",
     "description": "Tasks to calculate next version and to update application versions",
     "categories": [
