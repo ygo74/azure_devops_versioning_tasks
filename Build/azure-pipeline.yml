@@ -36,7 +36,7 @@ stages:
             inputs:
               command: 'custom'
               workingDir: '$(Build.SourcesDirectory)'
-              customCommand: 'run build -- --task $(taskName)'
+              customCommand: 'run _build -- --task $(taskName)'
 
 
           # - task:  Npm@1
@@ -75,7 +75,7 @@ stages:
             inputs:
               command: 'custom'
               workingDir: '$(Build.SourcesDirectory)'
-              customCommand: 'run build -- --task CalculateNextVersionV1'
+              customCommand: 'run _build -- --task CalculateNextVersionV1'
 
           - task: QueryAzureDevOpsExtensionVersion@3
             inputs:
