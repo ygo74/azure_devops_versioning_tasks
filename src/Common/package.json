@@ -1,0 +1,19 @@
+{
+  "name": "azure_devops_versioning-tasks.common",
+  "description": "Common functions for azure devops versioning tasks",
+  "author": "YGO74",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ygo74/azure_devops_versioning_tasks.git"
+  },
+  "dependencies": {
+    "azure-pipelines-task-lib": "^3.1.9",
+    "azure-pipelines-tool-lib": "^0.13.3",
+    "xml-js": "^1.6.11"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.6",
+    "@types/q": "^1.5.5"
+  }
+}

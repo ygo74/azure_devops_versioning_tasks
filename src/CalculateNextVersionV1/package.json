@@ -11,8 +11,23 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "azure-pipelines-task-lib": "^3.1.9",
-    "semver": "^7.3.5"
+    "azure-pipelines-task-lib": "^3.4.0",
+    "azure-pipelines-tool-lib": "^0.13.3",
+    "js-yaml": "^4.1.0",
+    "semver": "^7.3.5",
+    "stripbom": "^3.0.0",
+    "utf8": "^3.0.0",
+    "yaml": "^2.3.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@types/chai": "^4.2.22",
+    "@types/js-yaml": "^4.0.5",
+    "@types/mocha": "^9.0.0",
+    "@types/q": "^1.5.5",
+    "@types/xml2js": "^0.4.9",
+    "q": "^1.5.1",
+    "strip-bom": "^5.0.0",
+    "typings": "^2.1.1",
+    "xml2js": "^0.4.23"
+  }
 }

@@ -1,0 +1,14 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "module": "commonjs",                                /* Specify what module code is generated. */
+    "target": "es6",                                     /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
+    "sourceMap": true,                                /* Create source map files for emitted JavaScript files. */
+    "strict": true,                                      /* Enable all strict type-checking options. */
+    "strictNullChecks": true,                         /* When type checking, take into account `null` and `undefined`. */
+    "removeComments": true,                           /* Disable emitting comments. */
+  },
+  "files":[
+    "./Common/Common.ts"
+  ]
+}

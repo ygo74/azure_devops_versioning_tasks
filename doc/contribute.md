@@ -9,43 +9,47 @@ added 1 package from 1 contributor in 18.02s
 
 ## develop tasks
 
-create folder
+1. create folder
 
-```powershell
-npm init --yes
-npm install azure-pipelines-task-lib --save
-npm install @types/node --save-dev
-npm install @types/q --save-dev
-```
+    ```powershell
+    npm init --yes
+    npm install azure-pipelines-task-lib --save
+    npm install azure-pipelines-tool-lib --save
+    npm install @types/node --save-dev
+    npm install @types/q --save-dev
+    ```
 
-Create tsconfig.json compiler options
-```powershell
-tsc --init --target es6
-```
+    npm install typescript@^4.4.3 -g --save-dev
 
+2. Create tsconfig.json compiler options
 
-Install test tools
+    ```powershell
+    tsc --init --target es6
+    ```
 
-```powershell
-npm install mocha --save-dev
-npm install sync-request --save-dev
-npm install @types/mocha --save-dev
-```
+3. Install test tools
 
-RUN tests
+    ```powershell
+    npm install mocha --save-dev
+    npm install sync-request --save-dev
+    npm install @types/mocha --save-dev
+    ```
+
+## Run tests
 
 tsc
 mocha tests/_suite.js
 
 $env:TASK_TEST_TRACE=1
 
-
 remarks :
-=> Catch Error : https://stackoverflow.com/questions/68240884/error-object-inside-catch-is-of-type-unkown
+
++ Catch Error : <https://stackoverflow.com/questions/68240884/error-object-inside-catch-is-of-type-unkown>
 
 ## Build extension
+
 tfx extension create --manifest-globs .\azure-devops-extension.json --output-path ./_releases --rev-version
 
 ## Debug
 
-https://github.com/microsoft/azure-pipelines-tasks/blob/master/docs/debugging.md
+<https://github.com/microsoft/azure-pipelines-tasks/blob/master/docs/debugging.md>

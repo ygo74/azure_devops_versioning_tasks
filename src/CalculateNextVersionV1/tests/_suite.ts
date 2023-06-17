@@ -21,6 +21,8 @@ describe('Sample task tests', function () {
         process.env["BUILD_BUILDNUMBER"] = '1';
         process.env["BUILD_DEFINITIONNAME"] = 'test';
         process.env["BUILD_SOURCEVERSION"] = "123abc"
+        // process.env["BUILD_SOURCEBRANCHNAME"] = "feature/test-1"
+        process.env["BUILD_SOURCEBRANCHNAME"] = "main"
 
     });
 
@@ -36,6 +38,13 @@ describe('Sample task tests', function () {
         let tr: ttm.MockTestRunner = new ttm.MockTestRunner(tp);
 
         tr.run();
+
+        const stdout = tr.stdout;
+        const stderr = tr.stderr;
+
+        console.log('stdout:', stdout);
+        console.log('stderr:', stderr);
+
         console.log(tr.succeeded);
         assert.equal(tr.succeeded, true, 'should have succeeded');
         assert.equal(tr.warningIssues.length, 0, "should have no warnings");

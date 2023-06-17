@@ -1,0 +1,162 @@
+{
+    "$schema": "https://raw.githubusercontent.com/Microsoft/azure-pipelines-task-lib/master/tasks.schema.json",
+    "id": "233ccb95-4053-4b1d-af6f-611220e38bd6",
+    "name": "CalculateNextVersionTest",
+    "friendlyName": "Calculate Next Version - test",
+    "description": "Calculate Next Version - test",
+    "helpMarkDown": "",
+    "category": "Utility",
+    "author": "YGO",
+    "version": {
+        "Major": 1,
+        "Minor": 3,
+        "Patch": 5
+    },
+    "groups": [
+        {
+            "name": "FileStrategy",
+            "displayName": "File strategy",
+            "isExpanded": true,
+            "visibleRule": "Strategy = file"
+        },
+        {
+            "name": "Versioning",
+            "displayName": "Versioning definition",
+            "isExpanded": true
+        }
+    ],
+    "instanceNameFormat": "Calculate Next Version",
+    "inputs": [
+        {
+            "name": "Strategy",
+            "type": "pickList",
+            "label": "Strategy used to retrieve the Version",
+            "defaultValue": "file",
+            "required": true,
+            "helpMarkDown": "Define how retrieve the version to calculate the NextVersion",
+            "options": {
+                "file": "File",
+                "user": "User",
+                "tag": "Tag"
+            }
+        },
+        {
+            "name": "FilePath",
+            "type": "filePath",
+            "label": "File which contains the version",
+            "defaultValue": "**/AssemblyInfo.cs",
+            "required": false,
+            "helpMarkDown": "Define the file which contains the version",
+            "groupName": "FileStrategy"
+        },
+        {
+            "name": "Language",
+            "type": "pickList",
+            "label": "File format which contains the version",
+            "defaultValue": "csharp",
+            "required": false,
+            "helpMarkDown": "Define the file format which contains the version",
+            "options": {
+                "csharp": "CSharp",
+                "vb": "VB",
+                "maven": "Maven",
+                "nodejs": "Nodejs",
+                "yaml": "Yaml",
+                "json": "Json",
+                "xml": "Xml"
+            },
+            "groupName": "FileStrategy"
+        },
+        {
+            "name": "AssemblyAttribute",
+            "type": "pickList",
+            "label": "Assembly file's attribute which contains the version",
+            "defaultValue": "AssemblyInformationalVersion",
+            "required": false,
+            "helpMarkDown": "Define the attribute in an Assembly file which contains the version",
+            "options": {
+                "AssemblyInformationalVersion": "AssemblyInformationalVersion",
+                "AssemblyVersion": "AssemblyVersion",
+                "AssemblyFileVersion": "AssemblyFileVersion"
+            },
+            "visibleRule": "Language = csharp || Language = vb",
+            "groupName": "FileStrategy"
+        },
+        {
+            "name": "VersionVariablePath",
+            "type": "string",
+            "label": "Path to find the version variable",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Define the path to find the version variable in a Yaml, Json or XML file",
+            "visibleRule": "Language = yaml || Language = json || Language = xml",
+            "groupName": "FileStrategy"
+        },
+        {
+            "name": "VersionScheme",
+            "type": "pickList",
+            "label": "Expected next version scheme",
+            "defaultValue": "semver",
+            "required": false,
+            "helpMarkDown": "Define the expected next version scheme",
+            "groupName": "Versioning",
+            "options": {
+                "semver": "SemVer",
+                "calendar": "Calendar"
+            }
+        },
+        {
+            "name": "Version",
+            "type": "string",
+            "label": "Expected next version",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Define the expected next version",
+            "visibleRule": "Strategy = user",
+            "groupName": "Versioning"
+        },
+        {
+            "name": "PatchAutoIncrement",
+            "type": "boolean",
+            "label": "Auto Increment Patch Number",
+            "defaultValue": "true",
+            "required": false,
+            "groupName": "Versioning",
+            "visibleRule": "VersionScheme = semver && PatchAutoIncrement = true",
+            "helpMarkDown": "Enable auto increment patch number based on existing package found in repository"
+        },
+        {
+            "name": "RepositoryKind",
+            "type": "pickList",
+            "label": "Repository type which can contain existing package",
+            "defaultValue": "nuget",
+            "required": false,
+            "helpMarkDown": "Select the repository type which can contain existing package",
+            "visibleRule": "VersionScheme = semver && PatchAutoIncrement = true",
+            "groupName": "Versioning",
+            "options": {
+                "nuget": "Nuget",
+                "powershell": "PowershellGet",
+                "maven": "Maven",
+                "npm": "Npm",
+                "docker": "Docker",
+                "generic": "Generic"
+            }
+        },
+        {
+            "name": "RepositoryUri",
+            "type": "string",
+            "label": "Repository Uri to find existing package",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Define the repository uri to find an existing package",
+            "visibleRule": "VersionScheme = semver && PatchAutoIncrement = true",
+            "groupName": "Versioning"
+        }
+    ],
+    "execution": {
+        "Node10": {
+            "target": "index.js"
+        }
+    }
+}

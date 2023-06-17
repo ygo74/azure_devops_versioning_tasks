@@ -1,0 +1,22 @@
+{
+  "name": "azure_devops_versioning-tasks.parsepomfile",
+  "version": "1.0.0",
+  "description": "Parse maven pom file to extract version",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc &  node ./../../_build/Tasks/ParsePomFileV1/index.js"
+  },
+  "author": "YGO74",
+  "license": "MIT",
+  "dependencies": {
+    "azure-pipelines-task-lib": "^3.1.10",
+    "azure-pipelines-tool-lib": "^0.13.3",
+    "semver": "^7.3.5",
+    "xml-js": "^1.6.11"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.6",
+    "@types/q": "^1.5.5"
+  }
+}

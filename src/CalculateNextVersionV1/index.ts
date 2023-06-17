@@ -1,33 +1,77 @@
+import path = require('path');
 import tl = require('azure-pipelines-task-lib/task');
+
+import * as parser from './parsefile';
+import { getHighestVersionFromBranches } from './branchVersionUtils';
+import { getCommitCount } from './branchVersionUtils';
+import { BranchConfiguration, findMatchingKey } from './readConfigurationFile';
+
+import * as toolLib from 'azure-pipelines-tool-lib/tool';
+
 const semver = require('semver');
 
 async function run() {
     try {
 
+        tl.debug('Start Task Run' );
+        tl.setResourcePath(path.join(__dirname, 'task.json'));
+
         // Read environments variables
-        const sourceBranch: string | undefined = tl.getVariable('Build.SourceBranch');
+        const sourceBranch: string | undefined = tl.getVariable('Build.SourceBranchName');
+        if (sourceBranch === undefined) throw new Error(`Unable to Get environment variable with Branch Name, lookup of Build.SourceBranchName not found`);
         console.log('SourceBranch', sourceBranch);
 
         // Read Mandatory inputs
-        const strategy: string | undefined = tl.getInput('Strategy', true);
-        const filePath: string | undefined = tl.getInput('FilePath', false);
-        const language: string | undefined = tl.getInput('Language', false);
-        const assemblyAttribute: string | undefined = tl.getInput('AssemblyAttribute', false);
-        const versionVariablePath: string | undefined = tl.getInput('VersionVariablePath', false);
-        const versionScheme: string | undefined = tl.getInput('VersionScheme', true);
+        const configurationLocation: string | undefined = tl.getInput('configurationLocation', true);
+        if (configurationLocation === undefined) throw new Error(`configurationLocation is not defined`);
+        const configurationPath: string | undefined = tl.getInput('configurationPath', true);
+        if (configurationPath === undefined) throw new Error(`ConfigurationPath is mandatory when configurationLocation is a file`);
 
         // Display Variables
-        console.log('Strategy : ', strategy);
-        console.log('FilePath : ', filePath);
-        console.log('Language : ', language);
-        console.log('AssemblyAttribute : ', assemblyAttribute);
-        console.log('VersionVariablePath : ', versionVariablePath);
-        console.log('VersionScheme : ', versionScheme);
+        console.log('Configuration Location : ', configurationLocation);
+        console.log('Configuration file path : ', configurationPath);
+
+        // Utiliser l'interface BranchConfiguration
+        const config: BranchConfiguration | undefined = findMatchingKey(sourceBranch, configurationPath);
+        if (config === undefined)
+        {
+            throw new Error(`Unable to find a configuration for branch ${sourceBranch}`);
+        }
+        console.log('Configuration found : ', config);
+
+        // Retrieve the current version number
+        let highestVersion: string;
+        switch(config.sourceVersion) {
+
+            case "git":
+                tl.debug('Search Highest version from existing branches' );
+                highestVersion = getHighestVersionFromBranches(config.sourceVersionBranchPattern);
+                break;
+
+            default:
+                throw new Error(`source version ${config.sourceVersion} is unknown`);
+                break;
+        }
+        console.log(`Found Current version equals to ${highestVersion}`);
 
         // Test semver increment
-        let version = '1.0.0';
-        let versionNext =semver.inc(version);
+        let versionNext =semver.inc(highestVersion, config.versionIncrement);
         console.log('Next Version calculated', versionNext);
+
+        if (config.hasOwnProperty('versionLabel'))
+        {
+            console.log('Add label to next version', config.versionLabel);
+            versionNext = `${versionNext}-${config.versionLabel}`
+            console.log('Next Version calculated with label', versionNext);
+
+            // Add number of commit from branch
+            const commitCount = getCommitCount(sourceBranch)
+            versionNext = `${versionNext}.${commitCount}`
+        }
+
+        // End of task set ouput variables
+        tl.setVariable("version", versionNext, false, true);
+        tl.setResult(tl.TaskResult.Succeeded, "");
 
 
     }

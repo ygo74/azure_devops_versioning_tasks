@@ -111,3 +111,4 @@ ResultsFile.xml
 .taskkey
 src/**/.taskkey
 src/**/*.js
+src/**/*.js.map

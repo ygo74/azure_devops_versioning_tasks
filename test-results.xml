@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="Mocha Tests" time="0.629" tests="1" failures="0">
-  <testsuite name="Root Suite" timestamp="2021-09-30T21:28:26" tests="0" failures="0" time="0">
+<testsuites name="Mocha Tests" time="0.988" tests="1" failures="1">
+  <testsuite name="Root Suite" timestamp="2023-06-17T23:19:07" tests="0" failures="0" time="0">
   </testsuite>
-  <testsuite name="Sample task tests" timestamp="2021-09-30T21:28:26" tests="1" file="D:\devel\github\azure_devops_versioning_tasks\_build\Tasks\CalculateNextVersionV1\tests\_suite.js" failures="0" time="0.629">
-    <testcase name="Sample task tests should succeed with simple inputs" time="0.629" classname="should succeed with simple inputs">
+  <testsuite name="Sample task tests" timestamp="2023-06-17T23:19:07" tests="1" file="D:\devel\github\azure_devops_versioning_tasks\_build\Tasks\CalculateNextVersionV1\tests\_suite.js" failures="1" time="0.988">
+    <testcase name="Sample task tests should succeed with simple inputs" time="0.988" classname="should succeed with simple inputs">
+      <failure><![CDATA[AssertionError [ERR_ASSERTION]: should display Strategy
+    at Context.<anonymous> (D:\devel\github\azure_devops_versioning_tasks\_build\Tasks\CalculateNextVersionV1\tests\_suite.js:61:16)
+    at callFnAsync (D:\devel\github\azure_devops_versioning_tasks\node_modules\mocha\lib\runnable.js:306:8)
+    at Test.Runnable.run (D:\devel\github\azure_devops_versioning_tasks\node_modules\mocha\lib\runnable.js:261:7)
+    at Runner.runTest (D:\devel\github\azure_devops_versioning_tasks\node_modules\mocha\lib\runner.js:421:10)
+    at D:\devel\github\azure_devops_versioning_tasks\node_modules\mocha\lib\runner.js:528:12
+    at next (D:\devel\github\azure_devops_versioning_tasks\node_modules\mocha\lib\runner.js:341:14)
+    at D:\devel\github\azure_devops_versioning_tasks\node_modules\mocha\lib\runner.js:351:7
+    at next (D:\devel\github\azure_devops_versioning_tasks\node_modules\mocha\lib\runner.js:283:14)
+    at Immediate._onImmediate (D:\devel\github\azure_devops_versioning_tasks\node_modules\mocha\lib\runner.js:319:5)
+    at processImmediate (internal/timers.js:461:21)]]></failure>
     </testcase>
   </testsuite>
 </testsuites>

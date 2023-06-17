@@ -57,4 +57,3 @@ We should support the following versioning scheme :
 * SemVer : Version must be at least with Major.Minor or Version can be Full Major.Minor.Patch and can also contains the metadata
 * Calendar Versioning : Version must be at least with Year.Month or Version can be Full Year.Month.Day and can also contains the metadata
 
-If

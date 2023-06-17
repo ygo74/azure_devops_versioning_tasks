@@ -1,0 +1,10 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+      "outDir": "./../../_build/tasks/ParsePomFileV1",
+      "sourceRoot": "./"
+  },
+  "files": [
+      "index.ts"
+  ]
+}

@@ -5,15 +5,9 @@ import path = require('path');
 let taskPath = path.join(__dirname, '..', 'index.js');
 let tmr: tmrm.TaskMockRunner = new tmrm.TaskMockRunner(taskPath);
 
-tmr.setInput('samplestring', 'human');
 process.env["BUILD_SOURCEBRANCH"] = "refs/heads/main2"
 
-tmr.setInput('Strategy', 'File');
-tmr.setInput('FilePath', 'src/Assembly.cs');
-tmr.setInput('Language', 'CSharp');
-tmr.setInput('AssemblyAttribute', 'AssemblyInformationalVersion');
-tmr.setInput('VersionVariablePath', 'N/A');
-tmr.setInput('VersionScheme', 'SemVer');
-
+tmr.setInput('configurationLocation', 'configurationPath');
+tmr.setInput('configurationPath', 'src/CalculateNextVersionV1/tests/config.yaml');
 
 tmr.run();
