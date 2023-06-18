@@ -5,7 +5,8 @@ import path = require('path');
 let taskPath = path.join(__dirname, '..', 'index.js');
 let tmr: tmrm.TaskMockRunner = new tmrm.TaskMockRunner(taskPath);
 
-process.env["BUILD_SOURCEBRANCH"] = "refs/heads/feature/test-1"
+// process.env["BUILD_SOURCEBRANCH"] = "refs/heads/feature/test-1"
+process.env["BUILD_SOURCEBRANCH"] = "refs/heads/main"
 process.env["BUILD_SOURCEBRANCHNAME"] = "main"
 
 tmr.setInput('configurationLocation', 'configurationPath');
