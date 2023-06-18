@@ -24,8 +24,14 @@ export function getHighestVersionFromBranches(branchPrefix: string): string {
 }
 
 export function getCommitCount(branch: string): number {
-  const command = `git rev-list --count ${branch}`;
+  const safeBranch = removeRefsHeads(branch);
+  const command = `git rev-list --count ${safeBranch}`;
   const result = execSync(command).toString().trim();
 
   return parseInt(result, 10);
+}
+
+function removeRefsHeads(branch: string): string {
+  const pattern = /^refs\/heads\//;
+  return branch.replace(pattern, '');
 }
