@@ -39,7 +39,7 @@ stages:
               customCommand: 'run _build -- --task $(taskName)'
 
 
-          - script: node ./Build/make.js test --task "$(task_pattern)"
+          - script: node ./Build/make.js test --task "$(taskName)"
             displayName: Run tests
 
           # - task:  Npm@1
