@@ -33,5 +33,5 @@ export function getCommitCount(branch: string): number {
 
 function removeRefsHeads(branch: string): string {
   const pattern = /^refs\/heads\//;
-  return branch.replace(pattern, '');
+  return branch.replace(pattern, 'origin/');
 }
