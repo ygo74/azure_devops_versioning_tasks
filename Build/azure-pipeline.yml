@@ -39,6 +39,9 @@ stages:
               customCommand: 'run _build -- --task $(taskName)'
 
 
+          - script: node ./Build/make.js test --task "$(task_pattern)"
+            displayName: Run tests
+
           # - task:  Npm@1
           #   displayName: Run tests for $(taskName)
           #   inputs:
@@ -50,10 +53,10 @@ stages:
           #   env:
           #     DEBUG: mocha*
 
-          # - task: PublishTestResults@2
-          #   inputs:
-          #     testResultsFormat: 'JUnit'
-          #     testResultsFiles: '**/*-results.xml'
+          - task: PublishTestResults@2
+            inputs:
+              testResultsFormat: 'JUnit'
+              testResultsFiles: '**/*-results.xml'
 
   - stage: Package_extension_and_publish_build_artifacts
     jobs:
