@@ -70,6 +70,7 @@ async function run() {
             // Add number of commit from branch
             const commitCount = getCommitCount(sourceBranch)
             versionNext = `${versionNext}.${commitCount}`
+            console.log('Next Version calculated with commit count', versionNext);
         }
 
         // End of task set ouput variables
