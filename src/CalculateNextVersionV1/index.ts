@@ -17,9 +17,12 @@ async function run() {
         tl.setResourcePath(path.join(__dirname, 'task.json'));
 
         // Read environments variables
-        const sourceBranch: string | undefined = tl.getVariable('Build.SourceBranchName');
-        if (sourceBranch === undefined) throw new Error(`Unable to Get environment variable with Branch Name, lookup of Build.SourceBranchName not found`);
-        console.log('SourceBranch', sourceBranch);
+        const sourceBranch: string | undefined = tl.getVariable('Build.SourceBranch');
+        const sourceBranchName: string | undefined = tl.getVariable('Build.SourceBranchName');
+        if (sourceBranch === undefined) throw new Error(`Unable to Get environment variable with Branch, lookup of Build.SourceBranch not found`);
+        if (sourceBranchName === undefined) throw new Error(`Unable to Get environment variable with Branch Name, lookup of Build.SourceBranchName not found`);
+        console.log('sourceBranch : ', sourceBranch);
+        console.log('sourceBranchName : ', sourceBranchName);
 
         // Read Mandatory inputs
         const configurationLocation: string | undefined = tl.getInput('configurationLocation', true);

@@ -21,8 +21,6 @@ describe('Sample task tests', function () {
         process.env["BUILD_BUILDNUMBER"] = '1';
         process.env["BUILD_DEFINITIONNAME"] = 'test';
         process.env["BUILD_SOURCEVERSION"] = "123abc"
-        // process.env["BUILD_SOURCEBRANCHNAME"] = "feature/test-1"
-        process.env["BUILD_SOURCEBRANCHNAME"] = "main"
 
     });
 

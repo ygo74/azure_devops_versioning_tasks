@@ -53,3 +53,11 @@ tfx extension create --manifest-globs .\azure-devops-extension.json --output-pat
 ## Debug
 
 <https://github.com/microsoft/azure-pipelines-tasks/blob/master/docs/debugging.md>
+
+## market place
+
+Publish: All accessible organizations, Marketplace (Publish)
+Share: All accessible organizations, Marketplace Publish
+Install: All accessible organizations or a specific organization, Extensions (read and manage), Marketplace (acquire)
+Query Version: All accessible organizations, Marketplace (read)
+Is Valid Extension: All accessible organizations, Marketplace (read)
