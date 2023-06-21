@@ -1,0 +1,31 @@
+{
+    "$schema": "https://raw.githubusercontent.com/Microsoft/azure-pipelines-task-lib/master/tasks.schema.json",
+    "id": "dfc50274-0d24-4356-9745-8ae2530ef0e3",
+    "name": "CleanSemanticVersionForDockerTag",
+    "friendlyName": "Clean Semantic version for docker tag",
+    "description": "Clean Semantic version for docker tag to replace the +",
+    "helpMarkDown": "",
+    "category": "Utility",
+    "author": "YGO",
+    "version": {
+        "Major": 0,
+        "Minor": 1,
+        "Patch": 0
+    },
+    "instanceNameFormat": "Clean Semantic version for docker tag",
+    "inputs": [
+        {
+            "name": "semanticVersioning",
+            "type": "string",
+            "label": "Semantic versioning to clean",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "The semantic versioning to be clean for docker tag compatibility"
+        }
+    ],
+    "execution": {
+        "Node": {
+            "target": "index.js"
+        }
+    }
+}
