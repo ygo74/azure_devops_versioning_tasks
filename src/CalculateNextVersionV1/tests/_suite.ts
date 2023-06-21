@@ -28,11 +28,61 @@ describe('Sample task tests', function () {
 
     });
 
-    it('should succeed with simple inputs', function(done: Mocha.Done) {
+    it('should succeed with build from master', function(done: Mocha.Done) {
         // Add success test here
         this.timeout(1000);
 
-        let tp = path.join(__dirname, 'success.js');
+        let tp = path.join(__dirname, 'build_from_master.js');
+        let tr: ttm.MockTestRunner = new ttm.MockTestRunner(tp);
+
+        tr.run();
+
+        const stdout = tr.stdout;
+        const stderr = tr.stderr;
+
+        console.log('stdout:', stdout);
+        console.log('stderr:', stderr);
+
+        console.log(tr.succeeded);
+        assert.equal(tr.succeeded, true, 'should have succeeded');
+        assert.equal(tr.warningIssues.length, 0, "should have no warnings");
+        assert.equal(tr.errorIssues.length, 0, "should have no errors");
+        console.log(tr.stdout);
+        assert.equal(tr.stdout.indexOf('Strategy :') >= 0, true, "should display Strategy");
+        done();
+
+    });
+
+    it('should succeed with build from feature branch', function(done: Mocha.Done) {
+        // Add success test here
+        this.timeout(1000);
+
+        let tp = path.join(__dirname, 'build_from_feature_branch.js');
+        let tr: ttm.MockTestRunner = new ttm.MockTestRunner(tp);
+
+        tr.run();
+
+        const stdout = tr.stdout;
+        const stderr = tr.stderr;
+
+        console.log('stdout:', stdout);
+        console.log('stderr:', stderr);
+
+        console.log(tr.succeeded);
+        assert.equal(tr.succeeded, true, 'should have succeeded');
+        assert.equal(tr.warningIssues.length, 0, "should have no warnings");
+        assert.equal(tr.errorIssues.length, 0, "should have no errors");
+        console.log(tr.stdout);
+        assert.equal(tr.stdout.indexOf('Strategy :') >= 0, true, "should display Strategy");
+        done();
+
+    });
+
+    it('should succeed with build from Pull request to master', function(done: Mocha.Done) {
+        // Add success test here
+        this.timeout(1000);
+
+        let tp = path.join(__dirname, 'build_from_pull_request_to_master.js');
         let tr: ttm.MockTestRunner = new ttm.MockTestRunner(tp);
 
         tr.run();

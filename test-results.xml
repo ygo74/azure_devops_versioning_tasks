@@ -1,11 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="Mocha Tests" time="0.943" tests="1" failures="1">
-  <testsuite name="Root Suite" timestamp="2023-06-18T09:45:31" tests="0" failures="0" time="0">
+<testsuites name="Mocha Tests" time="1.942" tests="3" failures="3">
+  <testsuite name="Root Suite" timestamp="2023-06-21T20:51:23" tests="0" failures="0" time="0">
   </testsuite>
-  <testsuite name="Sample task tests" timestamp="2023-06-18T09:45:31" tests="1" file="D:\devel\github\azure_devops_versioning_tasks\_build\Tasks\CalculateNextVersionV1\tests\_suite.js" failures="1" time="0.943">
-    <testcase name="Sample task tests should succeed with simple inputs" time="0.943" classname="should succeed with simple inputs">
+  <testsuite name="Sample task tests" timestamp="2023-06-21T20:51:23" tests="3" file="D:\devel\github\azure_devops_versioning_tasks\_build\Tasks\CalculateNextVersionV1\tests\_suite.js" failures="3" time="1.942">
+    <testcase name="Sample task tests should succeed with build from master" time="1.065" classname="should succeed with build from master">
       <failure><![CDATA[AssertionError [ERR_ASSERTION]: should display Strategy
     at Context.<anonymous> (D:\devel\github\azure_devops_versioning_tasks\_build\Tasks\CalculateNextVersionV1\tests\_suite.js:59:16)
+    at callFnAsync (D:\devel\github\azure_devops_versioning_tasks\node_modules\mocha\lib\runnable.js:306:8)
+    at Test.Runnable.run (D:\devel\github\azure_devops_versioning_tasks\node_modules\mocha\lib\runnable.js:261:7)
+    at Runner.runTest (D:\devel\github\azure_devops_versioning_tasks\node_modules\mocha\lib\runner.js:421:10)
+    at D:\devel\github\azure_devops_versioning_tasks\node_modules\mocha\lib\runner.js:528:12
+    at next (D:\devel\github\azure_devops_versioning_tasks\node_modules\mocha\lib\runner.js:341:14)
+    at D:\devel\github\azure_devops_versioning_tasks\node_modules\mocha\lib\runner.js:351:7
+    at next (D:\devel\github\azure_devops_versioning_tasks\node_modules\mocha\lib\runner.js:283:14)
+    at Immediate._onImmediate (D:\devel\github\azure_devops_versioning_tasks\node_modules\mocha\lib\runner.js:319:5)
+    at processImmediate (internal/timers.js:461:21)]]></failure>
+    </testcase>
+    <testcase name="Sample task tests should succeed with build from feature branch" time="0.442" classname="should succeed with build from feature branch">
+      <failure><![CDATA[AssertionError [ERR_ASSERTION]: should have succeeded
+    at Context.<anonymous> (D:\devel\github\azure_devops_versioning_tasks\_build\Tasks\CalculateNextVersionV1\tests\_suite.js:73:16)
+    at callFnAsync (D:\devel\github\azure_devops_versioning_tasks\node_modules\mocha\lib\runnable.js:306:8)
+    at Test.Runnable.run (D:\devel\github\azure_devops_versioning_tasks\node_modules\mocha\lib\runnable.js:261:7)
+    at Runner.runTest (D:\devel\github\azure_devops_versioning_tasks\node_modules\mocha\lib\runner.js:421:10)
+    at D:\devel\github\azure_devops_versioning_tasks\node_modules\mocha\lib\runner.js:528:12
+    at next (D:\devel\github\azure_devops_versioning_tasks\node_modules\mocha\lib\runner.js:341:14)
+    at D:\devel\github\azure_devops_versioning_tasks\node_modules\mocha\lib\runner.js:351:7
+    at next (D:\devel\github\azure_devops_versioning_tasks\node_modules\mocha\lib\runner.js:283:14)
+    at Immediate._onImmediate (D:\devel\github\azure_devops_versioning_tasks\node_modules\mocha\lib\runner.js:319:5)
+    at processImmediate (internal/timers.js:461:21)]]></failure>
+    </testcase>
+    <testcase name="Sample task tests should succeed with build from Pull request to master" time="0.435" classname="should succeed with build from Pull request to master">
+      <failure><![CDATA[AssertionError [ERR_ASSERTION]: should have succeeded
+    at Context.<anonymous> (D:\devel\github\azure_devops_versioning_tasks\_build\Tasks\CalculateNextVersionV1\tests\_suite.js:91:16)
     at callFnAsync (D:\devel\github\azure_devops_versioning_tasks\node_modules\mocha\lib\runnable.js:306:8)
     at Test.Runnable.run (D:\devel\github\azure_devops_versioning_tasks\node_modules\mocha\lib\runnable.js:261:7)
     at Runner.runTest (D:\devel\github\azure_devops_versioning_tasks\node_modules\mocha\lib\runner.js:421:10)

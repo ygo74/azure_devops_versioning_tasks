@@ -16,23 +16,57 @@ async function run() {
         tl.debug('Start Task Run' );
         tl.setResourcePath(path.join(__dirname, 'task.json'));
 
-        // Read environments variables
-        const sourceBranch: string | undefined = tl.getVariable('Build.SourceBranch');
-        const sourceBranchName: string | undefined = tl.getVariable('Build.SourceBranchName');
-        if (sourceBranch === undefined) throw new Error(`Unable to Get environment variable with Branch, lookup of Build.SourceBranch not found`);
-        if (sourceBranchName === undefined) throw new Error(`Unable to Get environment variable with Branch Name, lookup of Build.SourceBranchName not found`);
-        console.log('sourceBranch : ', sourceBranch);
-        console.log('sourceBranchName : ', sourceBranchName);
-
         // Read Mandatory inputs
         const configurationLocation: string | undefined = tl.getInput('configurationLocation', true);
         if (configurationLocation === undefined) throw new Error(`configurationLocation is not defined`);
         const configurationPath: string | undefined = tl.getInput('configurationPath', true);
         if (configurationPath === undefined) throw new Error(`ConfigurationPath is mandatory when configurationLocation is a file`);
 
-        // Display Variables
         console.log('Configuration Location : ', configurationLocation);
         console.log('Configuration file path : ', configurationPath);
+
+        // Detect if we are on a Pull request or an other reason
+        const buildReason: string = tl.getVariable('Build.Reason') || '';
+        const isPullRequest: boolean = buildReason === 'PullRequest';
+
+        // Init branch variables
+        let sourceBranch: string | undefined = undefined;
+        let sourceBranchName: string | undefined = undefined;
+        let targetBranch: string | undefined = undefined;
+        let targetBranchName: string | undefined = undefined;
+
+        // Read environments variables
+        if (isPullRequest) {
+            console.log('Build from Pull request');
+
+            // Read source branch Name and branch target from
+            // Branch origin : SYSTEM_PULLREQUEST_SOURCEBRANCH
+            sourceBranch = tl.getVariable('System.PullRequest.SourceBranch');
+            sourceBranchName = ''; // TODO see how have only the name as for normal build
+        } else {
+            console.log('Build from branch');
+
+            // Read source branch name from BUILD_SOURCEBRANCH or BUILD_SOURCEBRANCHNAME
+            sourceBranch = tl.getVariable('Build.SourceBranch');
+            sourceBranchName = tl.getVariable('Build.SourceBranchName');
+        }
+
+        if (sourceBranch === undefined) throw new Error(`Unable to Get environment variable with Branch, lookup of Build.SourceBranch not found`);
+        if (sourceBranchName === undefined) throw new Error(`Unable to Get environment variable with Branch Name, lookup of Build.SourceBranchName not found`);
+        console.log('source Branch : ', sourceBranch);
+        console.log('source BranchName : ', sourceBranchName);
+
+        // Read target branch from pull request information
+        if (isPullRequest) {
+            // Branch target : SYSTEM_PULLREQUEST_TARGETBRANCH or SYSTEM_PULLREQUEST_TARGETBRANCHNAME
+            // Pull request number : SYSTEM_PULLREQUEST_PULLREQUESTNUMBER
+            targetBranch = tl.getVariable('System.PullRequest.TargetBranch');
+            targetBranchName = tl.getVariable('System.PullRequest.TargetBranchName');
+            if (targetBranch === undefined) throw new Error(`Unable to Get environment variable with target Branch, lookup of System.PullRequest.TargetBranch not found`);
+            if (targetBranchName === undefined) throw new Error(`Unable to Get environment variable with traget Branch Name, lookup of System.PullRequest.TargetBranchName not found`);
+            console.log('Target Branch : ', targetBranch);
+            console.log('Target Branch Name : ', targetBranchName);
+        }
 
         // Utiliser l'interface BranchConfiguration
         const config: BranchConfiguration | undefined = findMatchingKey(sourceBranch, configurationPath);
