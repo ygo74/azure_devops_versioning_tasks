@@ -19,6 +19,9 @@
     "files": [
         {
             "path": "_build/Tasks/CalculateNextVersionV1"
+        },
+        {
+            "path": "_build/Tasks/CleanSemanticVersionForDockerTagV1"
         }
     ],
     "contributions": [
@@ -30,6 +33,16 @@
             ],
             "properties": {
                 "name": "_build/Tasks/CalculateNextVersionV1"
+            }
+        },
+        {
+            "id": "clean-semantic-version-for-docker-tag-v1",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "_build/Tasks/CleanSemanticVersionForDockerTagV1"
             }
         }
     ]

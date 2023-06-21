@@ -17,6 +17,9 @@ stages:
           matrix:
             CalculateNextVersionV1:
               taskName: 'CalculateNextVersionV1'
+            CleanSemanticVersionForDockerTagV1:
+              taskName: 'CleanSemanticVersionForDockerTagV1'
+
           maxParallel: 2
 
         steps:
@@ -79,6 +82,13 @@ stages:
               command: 'custom'
               workingDir: '$(Build.SourcesDirectory)'
               customCommand: 'run _build -- --task CalculateNextVersionV1'
+
+          - task: Npm@1
+            displayName: Compile Task CalculateNextVersionV1
+            inputs:
+              command: 'custom'
+              workingDir: '$(Build.SourcesDirectory)'
+              customCommand: 'run _build -- --task CleanSemanticVersionForDockerTagV1'
 
           - task: QueryAzureDevOpsExtensionVersion@3
             inputs:
