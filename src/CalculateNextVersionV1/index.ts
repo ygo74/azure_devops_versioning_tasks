@@ -3,7 +3,7 @@ import tl = require('azure-pipelines-task-lib/task');
 
 import * as parser from './parsefile';
 import { getHighestVersionFromBranches, getCurrentVersionFromBranch } from './branchVersionUtils';
-import { getCommitCount } from './branchVersionUtils';
+import { getCommitCount, incrementPatchVersion } from './branchVersionUtils';
 import { BranchConfiguration, findMatchingKey } from './readConfigurationFile';
 
 import * as toolLib from 'azure-pipelines-tool-lib/tool';
@@ -88,6 +88,9 @@ async function run() {
                 else {
                     tl.debug('Search version from the current branch' );
                     highestVersion = getCurrentVersionFromBranch(sourceBranch);
+                    // Add number of commit from branch
+                    const commitCount = getCommitCount(sourceBranch)
+                    highestVersion = incrementPatchVersion(highestVersion, commitCount);
                 }
                 break;
 

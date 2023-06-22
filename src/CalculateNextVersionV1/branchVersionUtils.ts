@@ -56,3 +56,20 @@ function removeRefsHeads(branch: string): string {
   }
 
 }
+
+export function incrementPatchVersion(version: string, commitCount: number): string {
+  const versionParts = version.split('.');
+  if (versionParts.length !== 3) {
+    throw new Error('Invalid semantic version format');
+  }
+
+  const patch = parseInt(versionParts[2]);
+  const newPatch = patch + commitCount;
+
+  if (isNaN(newPatch)) {
+    throw new Error('Invalid commit count');
+  }
+
+  return `${versionParts[0]}.${versionParts[1]}.${newPatch}`;
+}
+
