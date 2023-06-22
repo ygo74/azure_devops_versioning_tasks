@@ -40,7 +40,7 @@ export function getCurrentVersionFromBranch(branchName: string): string {
 
 export function getCommitCount(branch: string): number {
   const safeBranch = removeRefsHeads(branch);
-  const command = `git rev-list --count ${safeBranch}`;
+  const command = `git rev-list --count origin/master..${safeBranch}`;
   const result = execSync(command).toString().trim();
 
   return parseInt(result, 10);
