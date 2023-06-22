@@ -98,7 +98,13 @@ async function run() {
         console.log(`Found Current version equals to ${highestVersion}`);
 
         // Test semver increment
-        let versionNext =semver.inc(highestVersion, config.versionIncrement);
+        let versionNext: string = '';
+        if (config.versionIncrement != null && config.versionIncrement != undefined) {
+            versionNext = semver.inc(highestVersion, config.versionIncrement);
+        }
+        else {
+            versionNext = highestVersion
+        }
         console.log('Next Version calculated', versionNext);
 
         if (config.hasOwnProperty('versionLabel'))
