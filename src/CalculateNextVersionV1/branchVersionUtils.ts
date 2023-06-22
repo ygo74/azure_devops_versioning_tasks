@@ -23,6 +23,21 @@ export function getHighestVersionFromBranches(branchPrefix: string): string {
   return highestVersion;
 }
 
+export function getCurrentVersionFromBranch(branchName: string): string {
+
+  // extract version from branch Name
+  const versionRegex = /\d+\.\d+\.\d+/;
+  const versionMatch  = branchName.match(versionRegex);
+  if (versionMatch && versionMatch[0]) {
+    return versionMatch[0];
+  }
+  // default version
+  return "0.0.0"
+
+}
+
+
+
 export function getCommitCount(branch: string): number {
   const safeBranch = removeRefsHeads(branch);
   const command = `git rev-list --count ${safeBranch}`;
