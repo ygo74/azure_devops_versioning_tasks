@@ -42,7 +42,7 @@ async function run() {
             // Read source branch Name and branch target from
             // Branch origin : SYSTEM_PULLREQUEST_SOURCEBRANCH
             sourceBranch = tl.getVariable('System.PullRequest.SourceBranch');
-            sourceBranchName = ''; // TODO see how have only the name as for normal build
+            sourceBranchName = 'PullRequest'; // TODO see how have only the name as for normal build
         } else {
             console.log('Build from branch');
 
@@ -105,6 +105,12 @@ async function run() {
             const commitCount = getCommitCount(sourceBranch)
             versionNext = `${versionNext}.${commitCount}`
             console.log('Next Version calculated with commit count', versionNext);
+
+            // Add branch Name
+            if (config.addBranchName)
+            {
+                versionNext = `${versionNext}-${sourceBranchName}`
+            }
         }
 
         // End of task set ouput variables

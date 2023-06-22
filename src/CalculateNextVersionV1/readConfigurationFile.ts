@@ -14,6 +14,7 @@ export interface BranchConfiguration {
   patternMap: string[];
   versionIncrement: string;
   versionLabel: string;
+  addBranchName: boolean;
 }
 
 export interface Configuration {

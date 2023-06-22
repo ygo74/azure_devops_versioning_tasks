@@ -9,6 +9,7 @@ configuration:
       - '^.*/master$'
     versionIncrement: minor
     versionLabel: beta
+    addBranchName: false
 
   feature:
     sourceVersion: git
@@ -18,6 +19,7 @@ configuration:
       - '^(.*/)?feature(s)?/.*$'
     versionIncrement: minor
     versionLabel: beta
+    addBranchName: true
 
   release:
     sourceVersion: git
