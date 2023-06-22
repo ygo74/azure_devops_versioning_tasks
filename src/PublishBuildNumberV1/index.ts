@@ -7,16 +7,29 @@ async function run(): Promise<void> {
     tl.setResourcePath(path.join(__dirname, 'task.json'));
 
     // Read Mandatory inputs
-    const currentVersion: string = tl.getInput('semanticVersioning', true) || '';
+    let currentVersion: string = tl.getInput('semanticVersioning', true) || '';
+    const uniqueCounter: string = tl.getInput('uniqueCounter', false) || '';
+
+    if (uniqueCounter != '' && uniqueCounter != "0")
+    {
+        // Apply unique counter to semantic Versioning
+        currentVersion = `${currentVersion}+${uniqueCounter}`
+    }
 
     // Nettoyer la version (remplacer '+' par '-')
     const cleanedVersion: string = currentVersion.replace(/\+/g, '_');
 
-    // Afficher la version nettoyée
-    console.log(`Cleaned version: ${cleanedVersion}`);
+    // Afficher les versions à publier
+    console.log(`Full semantic versioning: ${currentVersion}`);
+    console.log(`Cleaned version for OCI: ${cleanedVersion}`);
 
     // End of task set ouput variables
+    tl.setVariable("SemanticVersion", currentVersion, false, true);
     tl.setVariable("CleanedVersion", cleanedVersion, false, true);
+
+    // Update Build number with the Semantic version
+    tl.updateBuildNumber(currentVersion);
+
     tl.setResult(tl.TaskResult.Succeeded, "");
 
   }

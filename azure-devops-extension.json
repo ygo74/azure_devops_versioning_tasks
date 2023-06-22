@@ -22,6 +22,9 @@
         },
         {
             "path": "_build/Tasks/CleanSemanticVersionForDockerTagV1"
+        },
+        {
+            "path": "_build/Tasks/PublishBuildNumberV1"
         }
     ],
     "contributions": [
@@ -43,6 +46,16 @@
             ],
             "properties": {
                 "name": "_build/Tasks/CleanSemanticVersionForDockerTagV1"
+            }
+        },
+        {
+            "id": "publicsh-build-number-v1",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "_build/Tasks/PublishBuildNumberV1"
             }
         }
     ]

@@ -6,7 +6,7 @@
     "description": "Clean Semantic version for docker tag to replace the +",
     "helpMarkDown": "",
     "category": "Utility",
-    "author": "YGO",
+    "author": "ygo74",
     "version": {
         "Major": 0,
         "Minor": 1,

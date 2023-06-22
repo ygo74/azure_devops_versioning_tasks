@@ -1,0 +1,39 @@
+{
+    "$schema": "https://raw.githubusercontent.com/Microsoft/azure-pipelines-task-lib/master/tasks.schema.json",
+    "id": "3fc27592-24d6-452e-a37c-94ae0086a686",
+    "name": "PublishBuildNumber",
+    "friendlyName": "Publish Build Number",
+    "description": "Update build number with version and publish semantic version with one cleaned for docker",
+    "helpMarkDown": "",
+    "category": "Utility",
+    "author": "ygo74",
+    "version": {
+        "Major": 0,
+        "Minor": 1,
+        "Patch": 0
+    },
+    "instanceNameFormat": "Update build number and publish version variables",
+    "inputs": [
+        {
+            "name": "semanticVersioning",
+            "type": "string",
+            "label": "Build version number",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "the expected build version number"
+        },
+        {
+            "name": "uniqueCounter",
+            "type": "string",
+            "label": "Unique counter to add to the build",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Add a unique counter to the build number"
+        }
+    ],
+    "execution": {
+        "Node": {
+            "target": "index.js"
+        }
+    }
+}

@@ -109,8 +109,12 @@ async function run() {
 
         // End of task set ouput variables
         tl.setVariable("version", versionNext, false, true);
-        tl.setResult(tl.TaskResult.Succeeded, "");
 
+        // Update Build Number
+        tl.updateBuildNumber(versionNext);
+
+        // Finish the task with success status
+        tl.setResult(tl.TaskResult.Succeeded, "");
 
     }
     catch (err: unknown) {
