@@ -1,29 +1,40 @@
 import * as path from 'path';
 import * as assert from 'assert';
 import * as ttm from 'azure-pipelines-task-lib/mock-test';
-
+import * as childProcess from 'child_process';
 import proxyquire from 'proxyquire';
 
-const findBranchWithMaxVersion = proxyquire('./../branchVersionUtils', {
-    'child_process': {
-      execSync: (command: string) => {
-        // Mockez la sortie de la commande 'git branch -r' avec les branches simulées
-        if (command === 'git branch -r') {
-          return Buffer.from(`
-            origin/release/1.0.0
-            origin/releases/v1.2.3
-            origin/release/feature/2.0.0
-            origin/releases/xxx/1.1.1
-            origin/release/0.9.0
-          `);
-        }
+// Créez un stub pour l'appel execSync
+const execSyncStub = (command: string) => {
+  // Mockez la sortie de la commande 'git branch -r' avec les branches simulées
+  if (command === 'git branch -r') {
+    return Buffer.from(`
+      origin/release/1.0.0
+      origin/releases/v1.2.3
+      origin/release/feature/2.0.0
+      origin/releases/xxx/1.1.1
+      origin/release/0.9.0
+    `);
+  }
 
-        // Autres cas de mock pour d'autres appels à execSync si nécessaire
+  // Autres cas de mock pour d'autres appels à execSync si nécessaire
 
-        return Buffer.from('');
-      }
-    }
-  }).findBranchWithMaxVersion;
+  return childProcess.execSync(command);
+};
+
+// Utilisez proxyquire pour charger le module avec le stub
+const branchVersionUtils = proxyquire('./../branchVersionUtils', {
+  'child_process': {
+    execSync: execSyncStub
+  }
+});
+
+// Utilisez directement la fonction findBranchWithMaxVersion du module
+const findBranchWithMaxVersion = branchVersionUtils.findBranchWithMaxVersion;
+
+describe('Sample task tests', function () {
+  // Reste du code de votre test unitaire
+});
 
 describe('Sample task tests', function () {
 

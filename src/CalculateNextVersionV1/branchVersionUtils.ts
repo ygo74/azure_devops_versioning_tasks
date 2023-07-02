@@ -95,7 +95,7 @@ export function findBranchWithMaxVersion(pattern: string): string {
   const branchLines = output.split('\n');
   console.log(`found branches ${branchLines}`);
 
-  let maxVersion = '';
+  let maxVersion = '0.0.0';
   let maxVersionBranch: string | undefined;
 
   for (const line of branchLines) {
