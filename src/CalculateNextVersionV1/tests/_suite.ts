@@ -2,6 +2,29 @@ import * as path from 'path';
 import * as assert from 'assert';
 import * as ttm from 'azure-pipelines-task-lib/mock-test';
 
+import proxyquire from 'proxyquire';
+
+const findBranchWithMaxVersion = proxyquire('./../branchVersionUtils', {
+    'child_process': {
+      execSync: (command: string) => {
+        // Mockez la sortie de la commande 'git branch -r' avec les branches simulées
+        if (command === 'git branch -r') {
+          return Buffer.from(`
+            origin/release/1.0.0
+            origin/releases/v1.2.3
+            origin/release/feature/2.0.0
+            origin/releases/xxx/1.1.1
+            origin/release/0.9.0
+          `);
+        }
+
+        // Autres cas de mock pour d'autres appels à execSync si nécessaire
+
+        return Buffer.from('');
+      }
+    }
+  }).findBranchWithMaxVersion;
+
 describe('Sample task tests', function () {
 
     before( function() {

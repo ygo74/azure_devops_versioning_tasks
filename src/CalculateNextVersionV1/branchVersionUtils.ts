@@ -93,17 +93,22 @@ export function findBranchWithMaxVersion(pattern: string): string {
   const command = 'git branch -r';
   const output = execSync(command).toString().trim();
   const branchLines = output.split('\n');
+  console.log(`found branches ${branchLines}`);
 
   let maxVersion = '';
   let maxVersionBranch: string | undefined;
 
   for (const line of branchLines) {
     const branch = line.trim().substring(7);
+    console.log(`Analysis branch: ${branch}`);
     if (testRegexPattern(pattern, branch)) {
+      console.log(`Found branch which matches pattern : ${branch}`);
       const version = extractVersionFromBranch(branch);
+      console.log(`Found version : ${version}`);
       if (semver.valid(version) && semver.gt(version, maxVersion)) {
         maxVersion = version;
         maxVersionBranch = branch;
+        console.log(`New max version is now : ${version}`);
       }
     }
   }
@@ -111,5 +116,5 @@ export function findBranchWithMaxVersion(pattern: string): string {
   if (maxVersionBranch === undefined )
     return '0.0.0';
   else
-    return maxVersionBranch;
+    return maxVersion;
 }
