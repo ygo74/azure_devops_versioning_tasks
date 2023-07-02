@@ -2,7 +2,7 @@ import path = require('path');
 import tl = require('azure-pipelines-task-lib/task');
 
 import * as parser from './parsefile';
-import { getHighestVersionFromBranches, getCurrentVersionFromBranch } from './branchVersionUtils';
+import { getHighestVersionFromBranches, getCurrentVersionFromBranch, findBranchWithMaxVersion } from './branchVersionUtils';
 import { getCommitCount, incrementPatchVersion } from './branchVersionUtils';
 import { BranchConfiguration, findMatchingKey } from './readConfigurationFile';
 
@@ -83,7 +83,7 @@ async function run() {
             case "git":
                 if (config.sourceVersionMode == "branch") {
                     tl.debug('Search Highest version from existing branches' );
-                    highestVersion = getHighestVersionFromBranches(config.sourceVersionBranchPattern);
+                    highestVersion = findBranchWithMaxVersion(config.sourceVersionBranchPattern);
                 }
                 else {
                     tl.debug('Search version from the current branch' );

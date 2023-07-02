@@ -1,4 +1,5 @@
 import { execSync } from 'child_process';
+import semver from 'semver';
 
 export function getHighestVersionFromBranches(branchPrefix: string): string {
   // Récupérer les noms de branches Git
@@ -73,3 +74,42 @@ export function incrementPatchVersion(version: string, commitCount: number): str
   return `${versionParts[0]}.${versionParts[1]}.${newPatch}`;
 }
 
+
+function testRegexPattern(pattern: string, input: string): boolean {
+  const regex = new RegExp(pattern);
+  return regex.test(input);
+}
+
+function extractVersionFromBranch(branch: string): string {
+  const pattern = /\/(\d+\.\d+\.\d+)$/;
+  const matchResult = branch.match(pattern);
+  if (matchResult && matchResult[1]) {
+    return matchResult[1];
+  }
+  return '';
+}
+
+export function findBranchWithMaxVersion(pattern: string): string {
+  const command = 'git branch -r';
+  const output = execSync(command).toString().trim();
+  const branchLines = output.split('\n');
+
+  let maxVersion = '';
+  let maxVersionBranch: string | undefined;
+
+  for (const line of branchLines) {
+    const branch = line.trim().substring(7);
+    if (testRegexPattern(pattern, branch)) {
+      const version = extractVersionFromBranch(branch);
+      if (semver.valid(version) && semver.gt(version, maxVersion)) {
+        maxVersion = version;
+        maxVersionBranch = branch;
+      }
+    }
+  }
+
+  if (maxVersionBranch === undefined )
+    return '0.0.0';
+  else
+    return maxVersionBranch;
+}
