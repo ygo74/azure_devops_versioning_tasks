@@ -89,6 +89,11 @@ function extractVersionFromBranch(branch: string): string {
   return '';
 }
 
+/**
+ * Finds the branch with the maximum version that matches the given pattern.
+ * @param pattern - The pattern to match against branch names.
+ * @returns The branch with the maximum version, or '0.0.0' if no matching branch is found.
+ */
 export function findBranchWithMaxVersion(pattern: string): string {
   const command = 'git branch -r';
   const output = execSync(command).toString().trim();
@@ -98,13 +103,20 @@ export function findBranchWithMaxVersion(pattern: string): string {
   let maxVersion = '0.0.0';
   let maxVersionBranch: string | undefined;
 
+  // Iterate through each branch line
   for (const line of branchLines) {
     const branch = line.trim().substring(7);
     console.log(`Analysis branch: ${branch}`);
+
+    // Check if the branch matches the given pattern
     if (testRegexPattern(pattern, branch)) {
       console.log(`Found branch which matches pattern : ${branch}`);
+
+      // Extract the version from the branch name
       const version = extractVersionFromBranch(branch);
       console.log(`Found version : ${version}`);
+
+      // Compare the version with the current maximum version
       if (semver.valid(version) && semver.gt(version, maxVersion)) {
         maxVersion = version;
         maxVersionBranch = branch;
@@ -113,7 +125,8 @@ export function findBranchWithMaxVersion(pattern: string): string {
     }
   }
 
-  if (maxVersionBranch === undefined )
+  // Return the branch with the maximum version
+  if (maxVersionBranch === undefined)
     return '0.0.0';
   else
     return maxVersion;

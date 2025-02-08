@@ -62,7 +62,7 @@ describe('Sample task tests', function () {
 
     });
 
-    it('should succeed with build from master', function(done: Mocha.Done) {
+    it('should succeed with build from master', function(this: Mocha.Context, done: Mocha.Done) {
         // Add success test here
         this.timeout(1000);
 
@@ -87,7 +87,7 @@ describe('Sample task tests', function () {
 
     });
 
-    it('should succeed with build from feature branch', function(done: Mocha.Done) {
+    it('should succeed with build from feature branch', function(this: Mocha.Context, done: Mocha.Done) {
         // Add success test here
         this.timeout(1000);
 
@@ -112,7 +112,7 @@ describe('Sample task tests', function () {
 
     });
 
-    it('should succeed with build from Pull request to master', function(done: Mocha.Done) {
+    it('should succeed with build from Pull request to master', function(this: Mocha.Context, done: Mocha.Done) {
         // Add success test here
         this.timeout(1000);
 
@@ -137,7 +137,7 @@ describe('Sample task tests', function () {
 
     });
 
-    it('should succeed with build from release branch', function(done: Mocha.Done) {
+    it('should succeed with build from release branch', function(this: Mocha.Context, done: Mocha.Done) {
         // Add success test here
         this.timeout(1000);
 
